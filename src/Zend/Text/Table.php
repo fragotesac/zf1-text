@@ -379,6 +379,8 @@ class Zend_Text_Table
             // Get all column widths
             if (isset($columnWidths) === true) {
                 $lastColumnWidths = $columnWidths;
+            } else {
+                $lastColumnWidths = array();
             }
 
             $renderedRow  = $row->render($this->_columnWidths, $this->_decorator, $this->_padding);

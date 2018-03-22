@@ -20,11 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Text/Table.php';
-require_once 'Zend/Text/Table/Row.php';
-require_once 'Zend/Text/Table/Column.php';
-require_once 'Zend/Text/Table/Decorator/Unicode.php';
-require_once 'Zend/Text/Table/Decorator/Ascii.php';
 
 /**
  * @category   Zend

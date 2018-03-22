@@ -20,10 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * Zend_Text_MultiByte
- */
-require_once 'Zend/Text/MultiByte.php';
 
 /**
  * @category   Zend

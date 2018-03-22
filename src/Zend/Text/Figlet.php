@@ -595,6 +595,7 @@ class Zend_Text_Figlet
     protected function _splitLine()
     {
         $gotSpace = false;
+        $lastSpace = 0;
         for ($i = ($this->_inCharLineLength - 1); $i >= 0; $i--) {
             if (!$gotSpace && $this->_inCharLine[$i] === ' ') {
                 $gotSpace  = true;
@@ -737,6 +738,7 @@ class Zend_Text_Figlet
 
         $maxSmush = $this->_currentCharWidth;
         $amount   = $maxSmush;
+        $leftChar = null;
 
         for ($row = 0; $row < $this->_charHeight; $row++) {
             if ($this->_rightToLeft === 1) {
