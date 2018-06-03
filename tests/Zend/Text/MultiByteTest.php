@@ -63,8 +63,8 @@ class Zend_Text_MultiByteTest extends PHPUnit\Framework\TestCase
      */
     public function testWordWrapLongBreak()
     {
-        $line = Zend_Text_MultiByte::wordWrap("Ä very<br>long wöö<br>öööööööö<br>öörd.", 8, '<br>', false);
-        $this->assertEquals("Ä very<br>long wöö<br>öööööööö<br>öörd.", $line);
+        $line = Zend_Text_MultiByte::wordWrap('Ä very<br>long wöö<br>öööööööö<br>öörd.', 8, '<br>', false);
+        $this->assertEquals('Ä very<br>long wöö<br>öööööööö<br>öörd.', $line);
     }
 
     /**

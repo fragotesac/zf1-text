@@ -278,7 +278,7 @@ class Zend_Text_Figlet
         // Set options
         if (is_array($options)) {
             $this->setOptions($options);
-        } else if ($options instanceof Zend_Config) {
+        } elseif ($options instanceof Zend_Config) {
             $this->setConfig($options);
         }
 
@@ -401,7 +401,7 @@ class Zend_Text_Figlet
         } else {
             if ($smushMode === 0) {
                 $this->_userSmush = self::SM_KERN;
-            } else if ($smushMode === -1) {
+            } elseif ($smushMode === -1) {
                 $this->_userSmush = 0;
             } else {
                 $this->_userSmush = (($smushMode & 63) | self::SM_SMUSH);
@@ -484,7 +484,7 @@ class Zend_Text_Figlet
                 if ($wordBreakMode === -1) {
                     if ($char === ' ') {
                         break;
-                    } else if ($char === "\n") {
+                    } elseif ($char === "\n") {
                         $wordBreakMode = 0;
                         break;
                     }
@@ -495,13 +495,13 @@ class Zend_Text_Figlet
                 if ($char === "\n") {
                     $this->_appendLine();
                     $wordBreakMode = false;
-                } else if ($this->_addChar($char)) {
+                } elseif ($this->_addChar($char)) {
                     if ($char !== ' ') {
                         $wordBreakMode = ($wordBreakMode >= 2) ? 3: 1;
                     } else {
                         $wordBreakMode = ($wordBreakMode > 0) ? 2: 0;
                     }
-                } else if ($this->_outlineLength === 0) {
+                } elseif ($this->_outlineLength === 0) {
                     for ($i = 0; $i < $this->_charHeight; $i++) {
                         if ($this->_rightToLeft === 1 && $this->_outputWidth > 1) {
                             $offset = (strlen($this->_currentChar[$i]) - $this->_outlineLengthLimit);
@@ -512,7 +512,7 @@ class Zend_Text_Figlet
                     }
 
                     $wordBreakMode = -1;
-                } else if ($char === ' ') {
+                } elseif ($char === ' ') {
                     if ($wordBreakMode === 2) {
                         $this->_splitLine();
                     } else {
@@ -594,7 +594,7 @@ class Zend_Text_Figlet
      */
     protected function _splitLine()
     {
-        $gotSpace = false;
+        $gotSpace  = false;
         $lastSpace = 0;
         for ($i = ($this->_inCharLineLength - 1); $i >= 0; $i--) {
             if (!$gotSpace && $this->_inCharLine[$i] === ' ') {
@@ -809,7 +809,7 @@ class Zend_Text_Figlet
 
             if (empty($leftChar) || $leftChar === ' ') {
                 $amount++;
-            } else if (!empty($rightChar)) {
+            } elseif (!empty($rightChar)) {
                 if ($this->_smushem($leftChar, $rightChar) !== null) {
                     $amount++;
                 }
@@ -865,13 +865,13 @@ class Zend_Text_Figlet
             // This is smushing by universal overlapping
             if ($leftChar === ' ') {
                 return $rightChar;
-            } else if ($rightChar === ' ') {
+            } elseif ($rightChar === ' ') {
                 return $leftChar;
-            } else if ($leftChar === $this->_hardBlank) {
+            } elseif ($leftChar === $this->_hardBlank) {
                 return $rightChar;
-            } else if ($rightChar === $this->_hardBlank) {
+            } elseif ($rightChar === $this->_hardBlank) {
                 return $rightChar;
-            } else if ($this->_rightToLeft === 1) {
+            } elseif ($this->_rightToLeft === 1) {
                 return $leftChar;
             } else {
                 // Occurs in the absence of above exceptions
@@ -898,7 +898,7 @@ class Zend_Text_Figlet
         if (($this->_smushMode & self::SM_LOWLINE) > 0) {
             if ($leftChar === '_' && strchr('|/\\[]{}()<>', $rightChar) !== false) {
                 return $rightChar;
-            } else if ($rightChar === '_' && strchr('|/\\[]{}()<>', $leftChar) !== false) {
+            } elseif ($rightChar === '_' && strchr('|/\\[]{}()<>', $leftChar) !== false) {
                 return $leftChar;
             }
         }
@@ -906,23 +906,23 @@ class Zend_Text_Figlet
         if (($this->_smushMode & self::SM_HIERARCHY) > 0) {
             if ($leftChar === '|' && strchr('/\\[]{}()<>', $rightChar) !== false) {
                 return $rightChar;
-            } else if ($rightChar === '|' && strchr('/\\[]{}()<>', $leftChar) !== false) {
+            } elseif ($rightChar === '|' && strchr('/\\[]{}()<>', $leftChar) !== false) {
                 return $leftChar;
-            } else if (strchr('/\\', $leftChar) && strchr('[]{}()<>', $rightChar) !== false) {
+            } elseif (strchr('/\\', $leftChar) && strchr('[]{}()<>', $rightChar) !== false) {
                 return $rightChar;
-            } else if (strchr('/\\', $rightChar) && strchr('[]{}()<>', $leftChar) !== false) {
+            } elseif (strchr('/\\', $rightChar) && strchr('[]{}()<>', $leftChar) !== false) {
                 return $leftChar;
-            } else if (strchr('[]', $leftChar) && strchr('{}()<>', $rightChar) !== false) {
+            } elseif (strchr('[]', $leftChar) && strchr('{}()<>', $rightChar) !== false) {
                 return $rightChar;
-            } else if (strchr('[]', $rightChar) && strchr('{}()<>', $leftChar) !== false) {
+            } elseif (strchr('[]', $rightChar) && strchr('{}()<>', $leftChar) !== false) {
                 return $leftChar;
-            } else if (strchr('{}', $leftChar) && strchr('()<>', $rightChar) !== false) {
+            } elseif (strchr('{}', $leftChar) && strchr('()<>', $rightChar) !== false) {
                 return $rightChar;
-            } else if (strchr('{}', $rightChar) && strchr('()<>', $leftChar) !== false) {
+            } elseif (strchr('{}', $rightChar) && strchr('()<>', $leftChar) !== false) {
                 return $leftChar;
-            } else if (strchr('()', $leftChar) && strchr('<>', $rightChar) !== false) {
+            } elseif (strchr('()', $leftChar) && strchr('<>', $rightChar) !== false) {
                 return $rightChar;
-            } else if (strchr('()', $rightChar) && strchr('<>', $leftChar) !== false) {
+            } elseif (strchr('()', $rightChar) && strchr('<>', $leftChar) !== false) {
                 return $leftChar;
             }
         }
@@ -930,15 +930,15 @@ class Zend_Text_Figlet
         if (($this->_smushMode & self::SM_PAIR) > 0) {
             if ($leftChar === '[' && $rightChar === ']') {
                 return '|';
-            } else if ($rightChar === '[' && $leftChar === ']') {
+            } elseif ($rightChar === '[' && $leftChar === ']') {
                 return '|';
-            } else if ($leftChar === '{' && $rightChar === '}') {
+            } elseif ($leftChar === '{' && $rightChar === '}') {
                 return '|';
-            } else if ($rightChar === '{' && $leftChar === '}') {
+            } elseif ($rightChar === '{' && $leftChar === '}') {
                 return '|';
-            } else if ($leftChar === '(' && $rightChar === ')') {
+            } elseif ($leftChar === '(' && $rightChar === ')') {
                 return '|';
-            } else if ($rightChar === '(' && $leftChar === ')') {
+            } elseif ($rightChar === '(' && $leftChar === ')') {
                 return '|';
             }
         }
@@ -946,9 +946,9 @@ class Zend_Text_Figlet
         if (($this->_smushMode & self::SM_BIGX) > 0) {
             if ($leftChar === '/' && $rightChar === '\\') {
                 return '|';
-            } else if ($rightChar === '/' && $leftChar === '\\') {
+            } elseif ($rightChar === '/' && $leftChar === '\\') {
                 return 'Y';
-            } else if ($leftChar === '>' && $rightChar === '<') {
+            } elseif ($leftChar === '>' && $rightChar === '<') {
                 return 'X';
             }
         }
@@ -1000,7 +1000,8 @@ class Zend_Text_Figlet
         $magic = $this->_readMagic($fp);
 
         // Get the header
-        $numsRead = sscanf(fgets($fp, 1000),
+        $numsRead = sscanf(
+            fgets($fp, 1000),
                            '%*c%c %d %*d %d %d %d %d %d',
                            $this->_hardBlank,
                            $this->_charHeight,
@@ -1008,7 +1009,8 @@ class Zend_Text_Figlet
                            $smush,
                            $cmtLines,
                            $rightToLeft,
-                           $this->_fontSmush);
+                           $this->_fontSmush
+        );
 
         if ($magic !== self::FONTFILE_MAGIC_NUMBER || $numsRead < 5) {
             throw new Zend_Text_Figlet_Exception($fontFile . ': Not a FIGlet 2 font file');
@@ -1023,7 +1025,7 @@ class Zend_Text_Figlet
         if ($numsRead < 7) {
             if ($smush === 2) {
                 $this->_fontSmush = self::SM_KERN;
-            } else if ($smush < 0) {
+            } elseif ($smush < 0) {
                 $this->_fontSmush = 0;
             } else {
                 $this->_fontSmush = (($smush & 31) | self::SM_SMUSH);
@@ -1086,7 +1088,7 @@ class Zend_Text_Figlet
             // Convert it if required
             if (substr($uniCode, 0, 2) === '0x') {
                 $uniCode = hexdec(substr($uniCode, 2));
-            } else if (substr($uniCode, 0, 1) === '0' and
+            } elseif (substr($uniCode, 0, 1) === '0' and
                        $uniCode !== '0' or
                        substr($uniCode, 0, 2) === '-0') {
                 $uniCode = octdec($uniCode);
@@ -1120,9 +1122,9 @@ class Zend_Text_Figlet
     {
         if ($this->_smushOverride === self::SMO_NO) {
             $this->_smushMode = $this->_fontSmush;
-        } else if ($this->_smushOverride === self::SMO_YES) {
+        } elseif ($this->_smushOverride === self::SMO_YES) {
             $this->_smushMode = $this->_userSmush;
-        } else if ($this->_smushOverride === self::SMO_FORCE) {
+        } elseif ($this->_smushOverride === self::SMO_FORCE) {
             $this->_smushMode = ($this->_fontSmush | $this->_userSmush);
         }
     }
@@ -1211,13 +1213,13 @@ class Zend_Text_Figlet
 
         if ($h <= 0x7F) {
             $ord = $h;
-        } else if ($h < 0xC2) {
+        } elseif ($h < 0xC2) {
             $ord = 0;
-        } else if ($h <= 0xDF) {
+        } elseif ($h <= 0xDF) {
             $ord = (($h & 0x1F) << 6 | (ord($c[1]) & 0x3F));
-        } else if ($h <= 0xEF) {
+        } elseif ($h <= 0xEF) {
             $ord = (($h & 0x0F) << 12 | (ord($c[1]) & 0x3F) << 6 | (ord($c[2]) & 0x3F));
-        } else if ($h <= 0xF4) {
+        } elseif ($h <= 0xF4) {
             $ord = (($h & 0x0F) << 18 | (ord($c[1]) & 0x3F) << 12 |
                    (ord($c[2]) & 0x3F) << 6 | (ord($c[3]) & 0x3F));
         } else {

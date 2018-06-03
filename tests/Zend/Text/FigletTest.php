@@ -113,7 +113,7 @@ class Zend_Text_FigletTest extends PHPUnit\Framework\TestCase
         $this->expectException(\Zend_Text_Figlet_Exception::class);
 
         $this->markTestSkipped('Test case not reproducible on all setups');
-        $figlet  = new Zend_Text_Figlet();
+        $figlet = new Zend_Text_Figlet();
 
         if (PHP_OS == 'AIX') {
             $isoText = iconv('UTF-8', 'ISO-8859-15', 'Ömläüt');
@@ -175,8 +175,8 @@ class Zend_Text_FigletTest extends PHPUnit\Framework\TestCase
 
     public function testSmushModeRemovedRightToLeft()
     {
-        $figlet = new Zend_Text_Figlet(array('smushMode'     => -1,
-                                             'rightToLeft'   => Zend_Text_Figlet::DIRECTION_RIGHT_TO_LEFT));
+        $figlet = new Zend_Text_Figlet(array('smushMode'   => -1,
+                                             'rightToLeft' => Zend_Text_Figlet::DIRECTION_RIGHT_TO_LEFT));
 
         $this->_equalAgainstFile($figlet->render('Dummy'), 'NoSmushRightToLeft.figlet');
     }

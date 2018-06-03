@@ -65,22 +65,22 @@ class Zend_Text_MultiByte
             }
             
             if ($possibleBreak === $break) {
-                $result    .= iconv_substr($string, $lastStart, $current - $lastStart + $breakWidth, $charset);
-                $current   += $breakWidth - 1;
-                $lastStart  = $lastSpace = $current + 1;
+                $result .= iconv_substr($string, $lastStart, $current - $lastStart + $breakWidth, $charset);
+                $current += $breakWidth - 1;
+                $lastStart = $lastSpace = $current + 1;
             } elseif ($char === ' ') {
                 if ($current - $lastStart >= $width) {
-                    $result    .= iconv_substr($string, $lastStart, $current - $lastStart, $charset) . $break;
-                    $lastStart  = $current + 1;
+                    $result .= iconv_substr($string, $lastStart, $current - $lastStart, $charset) . $break;
+                    $lastStart = $current + 1;
                 }
                 
                 $lastSpace = $current;
             } elseif ($current - $lastStart >= $width && $cut && $lastStart >= $lastSpace) {
-                $result    .= iconv_substr($string, $lastStart, $current - $lastStart, $charset) . $break;
-                $lastStart  = $lastSpace = $current;
+                $result .= iconv_substr($string, $lastStart, $current - $lastStart, $charset) . $break;
+                $lastStart = $lastSpace = $current;
             } elseif ($current - $lastStart >= $width && $lastStart < $lastSpace) {
-                $result    .= iconv_substr($string, $lastStart, $lastSpace - $lastStart, $charset) . $break;
-                $lastStart  = $lastSpace = $lastSpace + 1;
+                $result .= iconv_substr($string, $lastStart, $lastSpace - $lastStart, $charset) . $break;
+                $lastStart = $lastSpace = $lastSpace + 1;
             }
         }
         
@@ -117,8 +117,8 @@ class Zend_Text_MultiByte
                 $lastStringRight = '';
                 $repeatCountLeft = $repeatCountRight = ($repeatCount - $repeatCount % 2) / 2;
 
-                $lastStringLength       = $lengthOfPadding - 2 * $repeatCountLeft * $padStringLength;
-                $lastStringLeftLength   = $lastStringRightLength = floor($lastStringLength / 2);
+                $lastStringLength     = $lengthOfPadding - 2 * $repeatCountLeft * $padStringLength;
+                $lastStringLeftLength = $lastStringRightLength = floor($lastStringLength / 2);
                 $lastStringRightLength += $lastStringLength % 2;
 
                 $lastStringLeft  = iconv_substr($padString, 0, $lastStringLeftLength, $charset);
