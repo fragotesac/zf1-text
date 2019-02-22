@@ -134,8 +134,8 @@ class Zend_Text_Table_Row
      */
     public function render(
         array $columnWidths,
-                           Zend_Text_Table_Decorator_Interface $decorator,
-                           $padding = 0
+        Zend_Text_Table_Decorator_Interface $decorator,
+        $padding = 0
     ) {
         // Prepare an array to store all column widths
         $this->_columnWidths = array();
@@ -162,8 +162,8 @@ class Zend_Text_Table_Row
             // Calculate the column width
             $columnWidth = ($colSpan - 1 + array_sum(array_slice(
                 $columnWidths,
-                                                                 $colNum,
-                                                                 $colSpan
+                (int) $colNum,
+                $colSpan
             )));
 
             // Render the column and split it's lines into an array
@@ -186,9 +186,9 @@ class Zend_Text_Table_Row
             $remainingWidth = (count($columnWidths) - $colNum - 1) +
                                array_sum(array_slice(
                                    $columnWidths,
-                                                     $colNum
+                                   (int) $colNum
                                ));
-            $renderedColumns[] = array(str_repeat(' ', $remainingWidth));
+            $renderedColumns[] = array(str_repeat(' ', (int) $remainingWidth));
 
             $this->_columnWidths[] = $remainingWidth;
         }
@@ -202,7 +202,7 @@ class Zend_Text_Table_Row
                 if (isset($renderedColumn[$line]) === true) {
                     $result .= $renderedColumn[$line];
                 } else {
-                    $result .= str_repeat(' ', $this->_columnWidths[$index]);
+                    $result .= str_repeat(' ', (int) $this->_columnWidths[$index]);
                 }
 
                 $result .= $decorator->getVertical();

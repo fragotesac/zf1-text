@@ -395,7 +395,7 @@ class Zend_Text_Table
                 foreach ($columnWidths as $columnNum => $columnWidth) {
                     $result .= str_repeat(
                         $this->_decorator->getHorizontal(),
-                                          $columnWidth
+                        $columnWidth
                     );
 
                     if (($columnNum + 1) === $numColumns) {
@@ -431,7 +431,7 @@ class Zend_Text_Table
                         // Add the horizontal line
                         $result .= str_repeat(
                             $this->_decorator->getHorizontal(),
-                                              $columnWidth
+                            $columnWidth
                         );
 
                         // If this is the last line, break out
@@ -491,13 +491,13 @@ class Zend_Text_Table
             $result .= $renderedRow;
 
             // If this is the last row, draw the table bottom
-            if (($rowNum + 1) === $numRows) {
+            if (((int) $rowNum + 1) === $numRows) {
                 $result .= $this->_decorator->getBottomLeft();
 
                 foreach ($columnWidths as $columnNum => $columnWidth) {
                     $result .= str_repeat(
                         $this->_decorator->getHorizontal(),
-                                          $columnWidth
+                        $columnWidth
                     );
 
                     if (($columnNum + 1) === $numColumns) {

@@ -116,7 +116,7 @@ class Zend_Text_Table_Column
         if ($inputCharset !== $outputCharset) {
             if (PHP_OS !== 'AIX') {
                 // AIX does not understand these character sets
-                $content = iconv($inputCharset, $outputCharset, $content);
+                $content = (string) iconv($inputCharset, $outputCharset, $content);
             }
         }
 
@@ -152,7 +152,7 @@ class Zend_Text_Table_Column
      */
     public function setColSpan($colSpan)
     {
-        if (is_int($colSpan) === false or $colSpan < 1) {
+        if (is_int($colSpan) === false || $colSpan < 1) {
             throw new Zend_Text_Table_Exception('$colSpan must be an integer and greater than 0');
         }
 
@@ -182,7 +182,7 @@ class Zend_Text_Table_Column
      */
     public function render($columnWidth, $padding = 0)
     {
-        if (is_int($columnWidth) === false or $columnWidth < 1) {
+        if (is_int($columnWidth) === false || $columnWidth < 1) {
             throw new Zend_Text_Table_Exception('$columnWidth must be an integer and greater than 0');
         }
 

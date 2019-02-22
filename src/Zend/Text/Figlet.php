@@ -444,7 +444,7 @@ class Zend_Text_Figlet
 
         $wordBreakMode  = 0;
         $lastCharWasEol = false;
-        $textLength     = @iconv_strlen($text, 'UTF-8');
+        $textLength     = @iconv_strlen((string) $text, 'UTF-8');
 
         if ($textLength === false) {
             throw new Zend_Text_Figlet_Exception('$text is not encoded with ' . $encoding);
@@ -452,25 +452,25 @@ class Zend_Text_Figlet
 
         for ($charNum = 0; $charNum < $textLength; $charNum++) {
             // Handle paragraphs
-            $char = iconv_substr($text, $charNum, 1, 'UTF-8');
+            $char = iconv_substr((string) $text, $charNum, 1, 'UTF-8');
 
             if ($char === "\n" && $this->_handleParagraphs && !$lastCharWasEol) {
-                $nextChar = iconv_substr($text, ($charNum + 1), 1, 'UTF-8');
+                $nextChar = iconv_substr((string) $text, ($charNum + 1), 1, 'UTF-8');
                 if (!$nextChar) {
                     $nextChar = null;
                 }
 
-                $char = (ctype_space($nextChar)) ? "\n" : ' ';
+                $char = (ctype_space((string) $nextChar)) ? "\n" : ' ';
             }
 
-            $lastCharWasEol = (ctype_space($char) && $char !== "\t" && $char !== ' ');
+            $lastCharWasEol = (ctype_space((string) $char) && $char !== "\t" && $char !== ' ');
 
-            if (ctype_space($char)) {
+            if (ctype_space((string) $char)) {
                 $char = ($char === "\t" || $char === ' ') ? ' ': "\n";
             }
 
             // Skip unprintable characters
-            $ordChar = $this->_uniOrd($char);
+            $ordChar = $this->_uniOrd((string) $char);
             if (($ordChar > 0 && $ordChar < 32 && $char !== "\n") || $ordChar === 127) {
                 continue;
             }
@@ -495,7 +495,7 @@ class Zend_Text_Figlet
                 if ($char === "\n") {
                     $this->_appendLine();
                     $wordBreakMode = false;
-                } elseif ($this->_addChar($char)) {
+                } elseif ($this->_addChar((string) $char)) {
                     if ($char !== ' ') {
                         $wordBreakMode = ($wordBreakMode >= 2) ? 3: 1;
                     } else {
@@ -1001,15 +1001,15 @@ class Zend_Text_Figlet
 
         // Get the header
         $numsRead = sscanf(
-            fgets($fp, 1000),
-                           '%*c%c %d %*d %d %d %d %d %d',
-                           $this->_hardBlank,
-                           $this->_charHeight,
-                           $this->_maxLength,
-                           $smush,
-                           $cmtLines,
-                           $rightToLeft,
-                           $this->_fontSmush
+            (string) fgets($fp, 1000),
+            '%*c%c %d %*d %d %d %d %d %d',
+            $this->_hardBlank,
+            $this->_charHeight,
+            $this->_maxLength,
+            $smush,
+            $cmtLines,
+            $rightToLeft,
+            $this->_fontSmush
         );
 
         if ($magic !== self::FONTFILE_MAGIC_NUMBER || $numsRead < 5) {
@@ -1079,7 +1079,7 @@ class Zend_Text_Figlet
         // At the end fetch all extended characters
         while (!feof($fp)) {
             // Get the Unicode
-            list($uniCode) = explode(' ', fgets($fp, 2048));
+            list($uniCode) = explode(' ', (string) fgets($fp, 2048));
 
             if (empty($uniCode)) {
                 continue;
@@ -1189,7 +1189,7 @@ class Zend_Text_Figlet
                 return false;
             }
 
-            $line = rtrim(fgets($fp, 2048), "\r\n");
+            $line = rtrim((string) fgets($fp, 2048), "\r\n");
 
             if (preg_match('#(.)\\1?$#', $line, $result) === 1) {
                 $line = str_replace($result[1], '', $line);
