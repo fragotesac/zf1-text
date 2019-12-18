@@ -278,6 +278,7 @@ class Zend_Text_Table
      * Set the input charset for column contents
      *
      * @param string $charset
+     * @return void
      */
     public static function setInputCharset($charset)
     {
@@ -298,6 +299,7 @@ class Zend_Text_Table
      * Set the output charset for column contents
      *
      * @param string $charset
+     * @return void
      */
     public static function setOutputCharset($charset)
     {
@@ -525,6 +527,7 @@ class Zend_Text_Table
             return $this->render();
         } catch (Exception $e) {
             trigger_error($e->getMessage(), E_USER_ERROR);
+            return '';
         }
     }
 }
