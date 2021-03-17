@@ -11,16 +11,16 @@ parameters:
         # Defensive coding
         -
             message: '#Strict comparison using === between true and false will always evaluate to false\.#'
-            path: %currentWorkingDirectory%/src/Zend/Text/Table/Column.php
+            path: ./src/Zend/Text/Table/Column.php
         -
-            message: '#Strict comparison using === between int and false will always evaluate to false\.#'
-            path: %currentWorkingDirectory%/src/Zend/Text/Figlet.php
+            message: '#Strict comparison using === between int\|false and null will always evaluate to false\.#'
+            path: ./src/Zend/Text/MultiByte.php
         -
-            message: '#Strict comparison using === between int and null will always evaluate to false\.#'
-            path: %currentWorkingDirectory%/src/Zend/Text/MultiByte.php
+            message: '#Parameter \#3 \$length of function iconv_substr expects int(\|null)?, int<min, 0>\|int<2, max>\|false given\.#'
+            path: ./src/Zend/Text/MultiByte.php
         -
             message: '#Result of && is always false\.#'
-            path: %currentWorkingDirectory%/src/Zend/Text/Table.php
+            path: ./src/Zend/Text/Table.php
         -
             message: '#Offset int does not exist on array\|null\.#'
             path: './src/Zend/Text/Figlet.php'

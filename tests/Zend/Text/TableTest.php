@@ -31,7 +31,7 @@
  */
 class Zend_Text_TableTest extends PHPUnit\Framework\TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         Zend_Text_Table::setInputCharset('utf-8');
         Zend_Text_Table::setOutputCharset('utf-8');
@@ -129,7 +129,7 @@ class Zend_Text_TableTest extends PHPUnit\Framework\TestCase
             $column = new Zend_Text_Table_Column(1);
             $this->fail('An expected InvalidArgumentException has not been raised');
         } catch (Zend_Text_Table_Exception $expected) {
-            $this->assertContains('$content must be a string', $expected->getMessage());
+            $this->assertStringContainsString('$content must be a string', $expected->getMessage());
         }
     }
 
@@ -139,7 +139,7 @@ class Zend_Text_TableTest extends PHPUnit\Framework\TestCase
             $column = new Zend_Text_Table_Column(null, false);
             $this->fail('An expected InvalidArgumentException has not been raised');
         } catch (Zend_Text_Table_Exception $expected) {
-            $this->assertContains('Invalid align supplied', $expected->getMessage());
+            $this->assertStringContainsString('Invalid align supplied', $expected->getMessage());
         }
     }
 
@@ -149,7 +149,7 @@ class Zend_Text_TableTest extends PHPUnit\Framework\TestCase
             $column = new Zend_Text_Table_Column(null, null, 0);
             $this->fail('An expected InvalidArgumentException has not been raised');
         } catch (Zend_Text_Table_Exception $expected) {
-            $this->assertContains('$colSpan must be an integer and greater than 0', $expected->getMessage());
+            $this->assertStringContainsString('$colSpan must be an integer and greater than 0', $expected->getMessage());
         }
     }
 
@@ -160,7 +160,7 @@ class Zend_Text_TableTest extends PHPUnit\Framework\TestCase
             $column->render(0);
             $this->fail('An expected InvalidArgumentException has not been raised');
         } catch (Zend_Text_Table_Exception $expected) {
-            $this->assertContains('$columnWidth must be an integer and greater than 0', $expected->getMessage());
+            $this->assertStringContainsString('$columnWidth must be an integer and greater than 0', $expected->getMessage());
         }
     }
 
@@ -209,7 +209,7 @@ class Zend_Text_TableTest extends PHPUnit\Framework\TestCase
             $row->render(array(10), $decorator);
             $this->fail('An expected Zend_Text_Table_Exception has not been raised');
         } catch (Zend_Text_Table_Exception $expected) {
-            $this->assertContains('Too many columns', $expected->getMessage());
+            $this->assertStringContainsString('Too many columns', $expected->getMessage());
         }
     }
 
@@ -221,7 +221,7 @@ class Zend_Text_TableTest extends PHPUnit\Framework\TestCase
             $row->getColumnWidths();
             $this->fail('An expected Zend_Text_Table_Exception has not been raised');
         } catch (Zend_Text_Table_Exception $expected) {
-            $this->assertContains('No columns were rendered yet', $expected->getMessage());
+            $this->assertStringContainsString('No columns were rendered yet', $expected->getMessage());
         }
     }
 
@@ -263,7 +263,7 @@ class Zend_Text_TableTest extends PHPUnit\Framework\TestCase
             $table = new Zend_Text_Table(array('columnWidths' => array()));
             $this->fail('An expected Zend_Text_Table_Exception has not been raised');
         } catch (Zend_Text_Table_Exception $expected) {
-            $this->assertContains('You must supply at least one column', $expected->getMessage());
+            $this->assertStringContainsString('You must supply at least one column', $expected->getMessage());
         }
     }
 
@@ -273,7 +273,7 @@ class Zend_Text_TableTest extends PHPUnit\Framework\TestCase
             $table = new Zend_Text_Table(array('columnWidths' => array('foo')));
             $this->fail('An expected Zend_Text_Table_Exception has not been raised');
         } catch (Zend_Text_Table_Exception $expected) {
-            $this->assertContains('Column 0 has an invalid column width', $expected->getMessage());
+            $this->assertStringContainsString('Column 0 has an invalid column width', $expected->getMessage());
         }
     }
 
@@ -367,7 +367,7 @@ class Zend_Text_TableTest extends PHPUnit\Framework\TestCase
             $table->render();
             $this->fail('An expected Zend_Text_Table_Exception has not been raised');
         } catch (Zend_Text_Table_Exception $expected) {
-            $this->assertContains('No rows were added to the table yet', $expected->getMessage());
+            $this->assertStringContainsString('No rows were added to the table yet', $expected->getMessage());
         }
     }
 
