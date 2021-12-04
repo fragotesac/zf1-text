@@ -224,6 +224,7 @@ class Zend_Text_Table
         if ($decorator instanceof Zend_Text_Table_Decorator_Interface) {
             $this->_decorator = $decorator;
         } else {
+            /** @phpstan-var class-string<Zend_Text_Table_Decorator_Interface> */
             $classname        = $this->getPluginLoader()->load($decorator);
             $this->_decorator = new $classname;
         }
