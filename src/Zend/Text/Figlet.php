@@ -561,8 +561,8 @@ class Zend_Text_Figlet
 
             if ($this->_justification > 0) {
                 for ($i = 1;
-                     ((3 - $this->_justification) * $i + $length + $this->_justification - 2) < $this->_outputWidth;
-                     $i++) {
+                    ((3 - $this->_justification) * $i + $length + $this->_justification - 2) < $this->_outputWidth;
+                    $i++) {
                     $this->_output .= ' ';
                 }
             }

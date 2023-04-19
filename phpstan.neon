@@ -1,5 +1,6 @@
 parameters:
     checkMissingIterableValueType: false
+    treatPhpDocTypesAsCertain: false
     level: 8
     paths:
         - ./
@@ -10,17 +11,32 @@ parameters:
         - '#Variable \$padMode might not be defined\.#'
         # Defensive coding
         -
-            message: '#Strict comparison using === between true and false will always evaluate to false\.#'
-            path: ./src/Zend/Text/Table/Column.php
-        -
-            message: '#Strict comparison using === between int\|false and null will always evaluate to false\.#'
+            message: '#Strict comparison using === between int<0, max>\|false and null will always evaluate to false\.#'
             path: ./src/Zend/Text/MultiByte.php
         -
-            message: '#Parameter \#3 \$length of function iconv_substr expects int(\|null)?, int<min, 0>\|int<2, max>\|false given\.#'
+            message: '#Parameter \#3 \$length of function iconv_substr expects int(\|null)?, int\|false given\.#'
             path: ./src/Zend/Text/MultiByte.php
         -
-            message: '#Result of && is always false\.#'
+            message: '#Offset int<0, max> does not exist on array\|null\.#'
+            path: ./src/Zend/Text/Figlet.php
+        -
+            message: '#Strict comparison using === between mixed and . . will always evaluate to false\.#'
+            path: ./src/Zend/Text/Figlet.php
+            count: 2
+        -
+            message: '#Binary operation "&" between float\|int<0, 1>\|int<3, max>\|string\|null and 31 results in an error\.#'
+            path: ./src/Zend/Text/Figlet.php
+            count: 1
+        -
+            message: '#Property Zend_Text_Figlet::\$_rightToLeft \(int\) does not accept float\|int\|string\|null\.#'
+            path: ./src/Zend/Text/Figlet.php
+            count: 1
+        -
+            message: '#Property Zend_Text_Figlet::\$_justification \(int\) does not accept float\|int\.#'
+            path: ./src/Zend/Text/Figlet.php
+            count: 1
+        -
+            message: '#Unreachable statement - code above always terminates\.#'
             path: ./src/Zend/Text/Table.php
-        -
-            message: '#Offset int does not exist on array\|null\.#'
-            path: './src/Zend/Text/Figlet.php'
+            count: 1
+
