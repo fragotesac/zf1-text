@@ -32,11 +32,15 @@ parameters:
             path: ./src/Zend/Text/Figlet.php
             count: 1
         -
-            message: '#Property Zend_Text_Figlet::\$_justification \(int\) does not accept float\|int\.#'
+            message: '#Unreachable statement - code above always terminates\.#'
+            path: ./src/Zend/Text/Table.php
+            count: 1
+        -
+            message: '#Call to sscanf contains 11 placeholders, 7 values given\.#'
             path: ./src/Zend/Text/Figlet.php
             count: 1
         -
-            message: '#Unreachable statement - code above always terminates\.#'
-            path: ./src/Zend/Text/Table.php
+            message: '#Binary operation "\*" between 2 and float\|int\|string\|null results in an error\.#'
+            path: ./src/Zend/Text/Figlet.php
             count: 1
 
